@@ -6,11 +6,14 @@ import {AllCoursesLayout} from './ui';
 
 
 export const AllCoursesPage = () => {
-	const {isLoading, selectedCourses, pageCount, page, handlePageChange} = useAllCourses();
+	const {
+		isLoading, selectedCourses, pageCount, page, handlePageChange,
+		handleCoursePreviewClick, navigateToHome
+	} = useAllCourses();
 
 	return (
 		<>
-			<Header/>
+			<Header navigateToHome={navigateToHome}/>
 			{isLoading || !selectedCourses ? (
 				<CircularProgress size={50}/>
 			) : (
@@ -19,6 +22,7 @@ export const AllCoursesPage = () => {
 					pageCount={pageCount}
 					page={page}
 					handlePageChange={handlePageChange}
+					handleCoursePreviewClick={handleCoursePreviewClick}
 				/>
 			)}
 		</>

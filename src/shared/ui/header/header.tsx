@@ -3,11 +3,15 @@ import {AppBar, Toolbar, Typography} from '@mui/material';
 import './header.scss';
 
 
-export const Header = () => {
+type Props = {
+	navigateToHome: () => void,
+}
+
+export const Header = ({navigateToHome}: Props) => {
 	return (
 		<AppBar className="header">
 			<Toolbar>
-				<Typography variant="h6">Home</Typography>
+				<Typography variant="h6" onClick={navigateToHome}>Home</Typography>
 			</Toolbar>
 		</AppBar>
 	);

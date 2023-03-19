@@ -19,7 +19,7 @@ type Props = {
 export const LessonsList = ({chosenOrder, handleChangeOrder, lessons}: Props) => {
 	return (
 		<List className="lessons-list">
-			{lessons.map(({title, previewImageLink, order, status}) => {
+			{lessons.map(({id, title, previewImageLink, order, status}) => {
 				const previewLink = getPreviewImageLink(previewImageLink, order);
 				const onClick = () => handleChangeOrder(order - 1);
 				const isChosen = order - 1 === chosenOrder;
@@ -27,7 +27,7 @@ export const LessonsList = ({chosenOrder, handleChangeOrder, lessons}: Props) =>
 				const listItemClassNames = clsx('lessons-list-item', isChosen && 'lessons-list-item_chosen');
 
 				return (
-					<Paper>
+					<Paper key={id}>
 						<ListItem className={listItemClassNames} onClick={onClick}>
 							<img className="lessons-list-item__image" src={previewLink} alt="title"/>
 							<Typography title={title} noWrap={true}>{title}</Typography>

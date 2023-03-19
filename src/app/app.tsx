@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
 		element: <AllCoursesPage/>
 	},
 	{
-		path: '/:course',
+		path: '/:courseId',
 		element: <CoursePage/>
 	}
 ]);

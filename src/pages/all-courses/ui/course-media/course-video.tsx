@@ -1,31 +1,9 @@
-import {useLayoutEffect, useRef, useCallback} from 'react';
 import {VideoPlayer} from 'shared/ui';
+
+import {useCourseVideo} from '../../hooks';
 
 import './course-video.scss';
 
-
-const TIMEOUT = 250;
-
-const setDisplayStyle = (element: HTMLImageElement | HTMLVideoElement | null, display: string = '') => {
-	if (element) {
-		element.style.display = display;
-	}
-};
-
-const toggleView = (
-	imageElement: HTMLImageElement | null,
-	videoElement: HTMLVideoElement | null,
-	disableImage: boolean
-) => {
-	if (disableImage) {
-		setDisplayStyle(imageElement, 'none');
-		setDisplayStyle(videoElement);
-	} else {
-
-		setDisplayStyle(imageElement);
-		setDisplayStyle(videoElement, 'none');
-	}
-};
 
 type Props = {
 	link: string | undefined,
@@ -34,43 +12,7 @@ type Props = {
 };
 
 export const CourseVideo = ({link, previewLink, title}: Props) => {
-	const timeoutId = useRef<ReturnType<typeof setTimeout>>();
-
-	const imageRef = useRef<HTMLImageElement>(null);
-	const videoRef = useRef<HTMLVideoElement>(null);
-
-	const handleMouseEnter = useCallback(() => {
-		timeoutId.current = setTimeout(() => {
-			const imageElement = imageRef.current;
-			const videoElement = videoRef.current;
-
-			toggleView(imageElement, videoElement, true);
-
-			if (videoElement && videoElement.readyState > videoElement.HAVE_CURRENT_DATA) {
-				videoElement.play();
-			}
-		}, TIMEOUT);
-	}, []);
-
-	const handleMouseLeave = useCallback(() => {
-		clearTimeout(timeoutId.current);
-
-		const imageElement = imageRef.current;
-		const videoElement = videoRef.current;
-
-		toggleView(imageElement, videoElement, false);
-
-		if (videoElement) {
-			videoElement.pause();
-			videoElement.currentTime = 0;
-		}
-	}, []);
-
-	useLayoutEffect(() => {
-		if (videoRef.current) {
-			videoRef.current.style.display = 'none';
-		}
-	}, []);
+	const {imageRef, videoRef, handleMouseEnter, handleMouseLeave} = useCourseVideo();
 
 	return (
 		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

@@ -6,11 +6,11 @@ import {CourseLayout} from './ui';
 
 
 export const CoursePage = () => {
-	const {isLoading, data} = useCoursePage();
+	const {isLoading, data, navigateToHome} = useCoursePage();
 
 	return (
 		<>
-			<Header/>
+			<Header navigateToHome={navigateToHome}/>
 			{isLoading || !data ? (
 				<CircularProgress size={50}/>
 			) : (

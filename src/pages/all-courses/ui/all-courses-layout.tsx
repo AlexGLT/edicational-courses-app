@@ -14,13 +14,16 @@ type Props = {
 	pageCount: number,
 	page: number,
 	handlePageChange: (event: ChangeEvent<unknown>, newPage: number) => void,
+	handleCoursePreviewClick: (courseId: string) => void,
 };
 
-export const AllCoursesLayout = ({selectedCourses, pageCount, page, handlePageChange}: Props) => {
+export const AllCoursesLayout = ({selectedCourses, pageCount, page, handlePageChange, handleCoursePreviewClick}: Props) => {
 	return (
 		<Main>
 			<section className="all-courses">
-				{selectedCourses.map((course) => <CoursePreview key={course.id} {...course}/>)}
+				{selectedCourses.map((course) => (
+					<CoursePreview key={course.id} handleCoursePreviewClick={handleCoursePreviewClick} {...course}/>
+				))}
 			</section>
 			<Pagination
 				size="large"

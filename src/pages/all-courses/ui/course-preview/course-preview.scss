@@ -7,4 +7,10 @@
 	height: min-content;
 
 	padding: 1rem;
+
+	transition: 0.5s !important;
+
+	&:hover {
+		background-color: darken(whitesmoke, 10%);
+	}
 }

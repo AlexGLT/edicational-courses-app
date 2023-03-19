@@ -1,4 +1,5 @@
 import {useState, useMemo, useCallback} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {useQuery} from 'react-query';
 
 import {axios} from 'shared/core';
@@ -11,8 +12,9 @@ const PAGE_COURSES_COUNT = 12;
 
 export const useAllCourses = () => {
 	const [page, setPage] = useState(0);
+	const navigate = useNavigate();
 
-	const {isLoading, data: allCourses, error} = useQuery<CourseWithLessonsCount[]>('all-courses', () => (
+	const {isLoading, data: allCourses} = useQuery<CourseWithLessonsCount[]>('all-courses', () => (
 		axios.get('/core/preview-courses')
 			.then((response) => response.data?.courses)
 	));
@@ -29,5 +31,15 @@ export const useAllCourses = () => {
 		allCourses ? allCourses.slice(page * PAGE_COURSES_COUNT, (page + 1) * PAGE_COURSES_COUNT) : []
 	), [allCourses, page]);
 
-	return {page, handlePageChange, pageCount, isLoading, selectedCourses, error};
+	const handleCoursePreviewClick = useCallback((courseId: string) => {
+		navigate(`/${courseId}`)
+	}, [navigate]);
+
+	const navigateToHome = useCallback(() => {
+		navigate('/');
+	}, [navigate])
+
+	return {
+		page, handlePageChange, pageCount, isLoading, selectedCourses, navigateToHome, handleCoursePreviewClick
+	};
 };
