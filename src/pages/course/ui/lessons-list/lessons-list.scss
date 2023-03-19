@@ -1,0 +1,38 @@
+.lessons-list {
+	display: flex;
+	flex-direction: column;
+
+	gap: 0.5rem;
+	max-width: 600px;
+
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.lessons-list-item {
+	display: flex;
+
+	gap: 1rem;
+	height: 4rem;
+
+	transition: 0.5s;
+
+	&__image {
+		height: 100%;
+		object-fit: contain;
+	}
+
+	&__icon {
+		margin-left: auto;
+	}
+
+	&_chosen {
+		background-color: #90EE90;
+	}
+
+	&:not(&_chosen) {
+		&:hover {
+			background-color: darken(whitesmoke, 10%);
+		}
+	}
+}

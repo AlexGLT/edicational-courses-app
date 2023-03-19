@@ -1,5 +1,5 @@
 import {useLayoutEffect, useRef, useCallback} from 'react';
-import {VideoPlayer} from 'entities/video-player';
+import {VideoPlayer} from 'shared/ui';
 
 import './course-video.scss';
 

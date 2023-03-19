@@ -1,1 +1,1 @@
-export {CoursePreview} from './course-preview';
+export {AllCoursesLayout} from './all-courses-layout';

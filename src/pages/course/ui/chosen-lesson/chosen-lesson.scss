@@ -1,0 +1,13 @@
+.chosen-lesson {
+	display: flex;
+	flex-direction: column;
+
+	gap: 1rem;
+
+	&__video {
+		display: flex;
+		min-width: 0;
+
+		width: 1000px;
+	}
+}

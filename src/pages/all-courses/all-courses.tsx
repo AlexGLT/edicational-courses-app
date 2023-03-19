@@ -1,14 +1,12 @@
-import {Pagination, CircularProgress} from '@mui/material';
+import {CircularProgress} from '@mui/material';
 
-import {Header, Main} from 'shared/ui';
+import {Header} from 'shared/ui';
 import {useAllCourses} from './hooks';
-import {CoursePreview} from './ui';
-
-import './all-courses.scss';
+import {AllCoursesLayout} from './ui';
 
 
 export const AllCoursesPage = () => {
-	const {page, handlePageChange, pageCount, selectedCourses, isLoading} = useAllCourses();
+	const {isLoading, selectedCourses, pageCount, page, handlePageChange} = useAllCourses();
 
 	return (
 		<>
@@ -16,20 +14,12 @@ export const AllCoursesPage = () => {
 			{isLoading || !selectedCourses ? (
 				<CircularProgress size={50}/>
 			) : (
-				<Main>
-					<section className="all-courses">
-						{selectedCourses.map((course) => <CoursePreview key={course.id} {...course}/>)}
-					</section>
-					<Pagination
-						size="large"
-						shape="rounded"
-						showFirstButton={true}
-						showLastButton={true}
-						count={pageCount}
-						page={page + 1}
-						onChange={handlePageChange}
-					/>
-				</Main>
+				<AllCoursesLayout
+					selectedCourses={selectedCourses}
+					pageCount={pageCount}
+					page={page}
+					handlePageChange={handlePageChange}
+				/>
 			)}
 		</>
 	);
