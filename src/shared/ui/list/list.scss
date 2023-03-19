@@ -1,0 +1,24 @@
+.list {
+	display: flex;
+	flex-direction: column;
+
+	&__caption {
+		font-size: 1.5rem;
+		font-weight: bold !important;
+	}
+
+	&__item {
+		&::marker {
+			content: "\2714\0020";
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0 0 0 1.5rem;
+
+		li {
+			margin: 0.5rem 0;
+		}
+	}
+}
